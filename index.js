@@ -19,14 +19,6 @@ function calculateFibonacci(n) {
 }
 
 app.get('/fib', (req, res) => {
-  //good
-  //入力がない
-  //文字列
-  //負の数
-
-  //bad
-  //-9uhなどが負の数として認識されてる
-  //1aが1返ってくる,3aが3返ってくる
   try {
     if (!req.query.n) {
       throw new Error('Input is required. Input must be a positive integer.');
