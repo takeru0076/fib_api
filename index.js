@@ -25,25 +25,25 @@ app.get('/fib', (req, res) => {
   //負の数
 
   //bad
-  //小数not
+  //-9uhなどが負の数として認識されてる
   //1aが1返ってくる,3aが3返ってくる
   try {
     if (!req.query.n) {
-      throw new Error('Input is required');
+      throw new Error('Input is required. Input must be a positive integer.');
     }
 
-    const n = parseInt(req.query.n);
+    const n = parseFloat(req.query.n);
 
-    if (isNaN(n)) {
-      throw new Error('Don\'t input string. Input must be a positive integer');
+    if (isNaN(n) || isNaN(req.query.n)) {
+      throw new Error('Don\'t input string. Input must be a positive integer.');
     }
 
-    if (n < 0) {
-      throw new Error('Don\'t input negative number. Input must be a positive integer');
+    if (n <= 0) {
+      throw new Error('Don\'t input non-positive number. Input must be a positive integer.');
     }
 
     if (n % 1 !== 0) {
-      throw new Error('Don\'t input decimal number. Input must be a positive integer');
+      throw new Error('Don\'t input decimal number. Input must be a positive integer.');
     }
 
     var data = calculateFibonacci(n);
