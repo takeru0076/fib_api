@@ -26,7 +26,7 @@ app.get('/fib', (req, res) => {
 
     const n = parseFloat(req.query.n);
 
-    if (isNaN(n) || isNaN(req.query.n)) {
+    if (isNaN(req.query.n)) {
       throw new Error('Don\'t input string. Input must be a positive integer.');
     }
 
