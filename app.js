@@ -40,13 +40,14 @@ app.get('/fib', (req, res) => {
       throw new Error('Don\'t input non-positive number. Input must be a positive integer.');
     }
 
-    if (n % 1 !== 0) {
+    /*if (n % 1 !== 0) {
       throw new Error('Don\'t input decimal number. Input must be a positive integer.');
-    }
+    }*/
 
     var data = calculateFibonacci(n);
     //data オブジェクトを JSON 文字列に変換
     let result = JSONbig.stringify({ result: data });
+    res.header('Content-Type', 'application/json')
     res.send(result);
   } catch (error) {
     res.status(400).json({ status: 400, message: error.message });
