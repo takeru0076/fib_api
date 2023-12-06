@@ -4,7 +4,7 @@ const assert = require('assert');
 
 describe('GET /fib', () => {
 
-  it('Returns JSON with the calculated Fibonacci result', (done) => {
+  it('n=5', (done) => {
     request(app)
       .get('/fib')
       .query({ n: 5 })
@@ -24,7 +24,7 @@ describe('GET /fib', () => {
       });
   });
 
-  it('Returns JSON with the calculated Fibonacci result', (done) => {
+  it('n=99', (done) => {
     request(app)
       .get('/fib')
       .query({ n: 99 })
@@ -44,7 +44,7 @@ describe('GET /fib', () => {
       });
   });
 
-  it('Returns JSON with the calculated Fibonacci result', (done) => {
+  it('n=1', (done) => {
     request(app)
       .get('/fib')
       .query({ n: 1 })
@@ -64,7 +64,27 @@ describe('GET /fib', () => {
       });
   });
 
-  it('Rejects negative input and responds with the expected error message.', (done) => {
+  it('n=3.14e2', (done) => {
+    request(app)
+      .get('/fib')
+      .query({ n: 3.14e2 })
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .end((err, res) => {
+        if (err) return done(err);
+
+        const expectedResponse = {
+          result: 187341518601536966291015050946540312701895836604078191803255601777
+        };
+
+        assert.deepStrictEqual(res.body, expectedResponse, 'Response body does not match expected structure');
+
+        done();
+      });
+  });
+
+  it('n=-1', (done) => {
     request(app)
       .get('/fib')
       .query({ n: -1 })
@@ -85,7 +105,28 @@ describe('GET /fib', () => {
       });
   });
 
-  it('Rejects empty input and responds with the expected error message.', (done) => {
+  it('n=1.2e-3', (done) => {
+    request(app)
+      .get('/fib')
+      .query({ n: 1.2e-3 })
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(400)
+      .end((err, res) => {
+        if (err) return done(err);
+
+        const expectedResponse = {
+          status: 400,
+          message: "Bad Request. Input must be a positive integer."
+        };
+
+        assert.deepStrictEqual(res.body, expectedResponse, 'Response body does not match expected structure');
+
+        done();
+      });
+  });
+
+  it('n=""', (done) => {
     request(app)
       .get('/fib')
       .query({ n: "" })
@@ -106,7 +147,7 @@ describe('GET /fib', () => {
       });
   });
 
-  it('Rejects string input and responds with the expected error message.', (done) => {
+  it('n=abc', (done) => {
     request(app)
       .get('/fib')
       .query({ n: "abc" })
@@ -127,7 +168,7 @@ describe('GET /fib', () => {
       });
   });
 
-  it('Rejects string input and responds with the expected error message.', (done) => {
+  it('n=９９', (done) => {
     request(app)
       .get('/fib')
       .query({ n: "９９" })
@@ -148,7 +189,7 @@ describe('GET /fib', () => {
       });
   });
 
-  it('Rejects string input and responds with the expected error message.', (done) => {
+  it('n=全角テst', (done) => {
     request(app)
       .get('/fib')
       .query({ n: "全角テst" })
@@ -169,7 +210,7 @@ describe('GET /fib', () => {
       });
   });
 
-  it('Rejects decimal input and responds with the expected error message.', (done) => {
+  it('n=0.1', (done) => {
     request(app)
       .get('/fib')
       .query({ n: 0.1 })
@@ -190,7 +231,7 @@ describe('GET /fib', () => {
       });
   });
 
-  it('Rejects decimal input and responds with the expected error message.', (done) => {
+  it('n=99.01', (done) => {
     request(app)
       .get('/fib')
       .query({ n: 99.01 })
@@ -211,7 +252,7 @@ describe('GET /fib', () => {
       });
   });
 
-  it('Rejects input starting with 0 and responds with the expected error message.', (done) => {
+  it('n=0123', (done) => {
     request(app)
       .get('/fib')
       .query({ n: "0123" })
@@ -232,7 +273,7 @@ describe('GET /fib', () => {
       });
   });
 
-  it('Rejects input of 0 and responds with the expected error message.', (done) => {
+  it('n=0', (done) => {
     request(app)
       .get('/fib')
       .query({ n: 0 })
@@ -253,7 +294,7 @@ describe('GET /fib', () => {
       });
   });
   
-  it('Returns 404 with the expected error message for unknown endpoint', (done) => {
+  it('Specify a nonexistent endpoint URL', (done) => {
     request(app)
       .get('/other')  // 未知のエンドポイント
       .set('Accept', 'application/json')
