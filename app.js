@@ -6,9 +6,9 @@ const port = 3001;
 const JSONbig = require('json-bigint');
 
 function calculateFibonacci(n) {
-  var current = BigInt(1);
-  var next = BigInt(1);
-  var tmp;
+  let current = BigInt(1);
+  let next = BigInt(1);
+  let tmp;
   for (let i = 1; i < n; i++) {
     tmp = current + next;
     current = next;
@@ -29,9 +29,9 @@ app.get('/fib', (req, res) => {
       throw new Error('Bad Request. Input must be a positive integer.');
     }
 
-    var data = calculateFibonacci(n);
+    const data = calculateFibonacci(n);
     //data オブジェクトを JSON 文字列に変換
-    let result = JSONbig.stringify({ result: data });
+    const result = JSONbig.stringify({ result: data });
     res.header('Content-Type', 'application/json')
     res.send(result);
   } catch (error) {
