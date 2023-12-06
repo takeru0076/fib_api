@@ -11,12 +11,12 @@
 
 
 ## ソースコードの構成
-fib_api/
-├── node_modules/
-├── app.js
-├── app.test.js
-├── package.json
-└── package-lock.json
+fib_api/  
+├── node_modules/  
+├── app.js  
+├── app.test.js  
+├── package.json  
+└── package-lock.json  
 
 * node_modules
 プロジェクトが依存するパッケージ（ライブラリやモジュール）が格納されるディレクトリ
