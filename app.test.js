@@ -76,7 +76,7 @@ describe('GET /fib', () => {
 
         const expectedResponse = {
           status: 400,
-          message: "Don't input non-positive number. Input must be a positive integer."
+          message: "Bad Request. Input must be a positive integer."
         };
 
         assert.deepStrictEqual(res.body, expectedResponse, 'Response body does not match expected structure');
@@ -97,7 +97,7 @@ describe('GET /fib', () => {
 
         const expectedResponse = {
           status: 400,
-          message: "Input is required. Input must be a positive integer."
+          message:"Bad Request. Input must be a positive integer."
         };
 
         assert.deepStrictEqual(res.body, expectedResponse, 'Response body does not match expected structure');
@@ -118,7 +118,7 @@ describe('GET /fib', () => {
 
         const expectedResponse = {
           status: 400,
-          message: "Don't input string. Input must be a positive integer."
+          message: "Bad Request. Input must be a positive integer."
         };
 
         assert.deepStrictEqual(res.body, expectedResponse, 'Response body does not match expected structure');
@@ -139,7 +139,7 @@ describe('GET /fib', () => {
 
         const expectedResponse = {
           status: 400,
-          message: "Don't input string. Input must be a positive integer."
+          message: "Bad Request. Input must be a positive integer."
         };
 
         assert.deepStrictEqual(res.body, expectedResponse, 'Response body does not match expected structure');
@@ -160,7 +160,7 @@ describe('GET /fib', () => {
 
         const expectedResponse = {
           status: 400,
-          message: "Don't input a 0 in the first letter. Input must be a positive integer."
+          message: "Bad Request. Input must be a positive integer."
         };
 
         assert.deepStrictEqual(res.body, expectedResponse, 'Response body does not match expected structure');
@@ -181,7 +181,7 @@ describe('GET /fib', () => {
 
         const expectedResponse = {
           status: 400,
-          message: "Don't input decimal number. Input must be a positive integer."
+          message: "Bad Request. Input must be a positive integer."
         };
 
         assert.deepStrictEqual(res.body, expectedResponse, 'Response body does not match expected structure');
@@ -202,7 +202,7 @@ describe('GET /fib', () => {
 
         const expectedResponse = {
           status: 400,
-          message: "Don't input a 0 in the first letter. Input must be a positive integer."
+          message: "Bad Request. Input must be a positive integer."
         };
 
         assert.deepStrictEqual(res.body, expectedResponse, 'Response body does not match expected structure');
@@ -223,7 +223,7 @@ describe('GET /fib', () => {
 
         const expectedResponse = {
           status: 400,
-          message: "Don't input a 0 in the first letter. Input must be a positive integer."
+          message: "Bad Request. Input must be a positive integer."
         };
 
         assert.deepStrictEqual(res.body, expectedResponse, 'Response body does not match expected structure');

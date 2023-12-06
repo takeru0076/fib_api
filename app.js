@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = 3001;
 //BigInt 型の値を JSON 文字列に変換するため
 //JSONbig.stringify() メソッドを呼び出すことができるようになる
 const JSONbig = require('json-bigint');
@@ -19,26 +19,14 @@ function calculateFibonacci(n) {
 
 app.get('/fib', (req, res) => {
   try {
-    if (!req.query.n) {
-      throw new Error('Input is required. Input must be a positive integer.');
-    }
-
     if (req.query.n.charAt(0) === '0') {
-      throw new Error('Don\'t input a 0 in the first letter. Input must be a positive integer.');
+      throw new Error('Bad Request. Input must be a positive integer.');
     }
 
-    if (isNaN(req.query.n)) {
-      throw new Error('Don\'t input string. Input must be a positive integer.');
-    }
+    const n = Number(req.query.n);
 
-    const n = parseFloat(req.query.n);
-
-    if (n <= 0) {
-      throw new Error('Don\'t input non-positive number. Input must be a positive integer.');
-    }
-
-    if (n % 1 !== 0) {
-      throw new Error('Don\'t input decimal number. Input must be a positive integer.');
+    if (!Number.isInteger(n) || n <= 0) {
+      throw new Error('Bad Request. Input must be a positive integer.');
     }
 
     var data = calculateFibonacci(n);
