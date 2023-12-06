@@ -252,6 +252,27 @@ describe('GET /fib', () => {
         done();
       });
   });
+
+  it('Rejects input of 0 and responds with the expected error message.', (done) => {
+    request(app)
+      .get('/fib')
+      .query({ n: 3/2 })
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(400)
+      .end((err, res) => {
+        if (err) return done(err);
+
+        const expectedResponse = {
+          status: 400,
+          message: "Bad Request. Input must be a positive integer."
+        };
+
+        assert.deepStrictEqual(res.body, expectedResponse, 'Response body does not match expected structure');
+
+        done();
+      });
+  });
   
   it('Returns 404 with the expected error message for unknown endpoint', (done) => {
     request(app)
