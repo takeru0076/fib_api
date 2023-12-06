@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 3001;
+const port = process.env.PORT || 3001;
 //BigInt 型の値を JSON 文字列に変換するため
 //JSONbig.stringify() メソッドを呼び出すことができるようになる
 const JSONbig = require('json-bigint');
