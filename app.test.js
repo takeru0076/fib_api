@@ -127,6 +127,27 @@ describe('GET /fib', () => {
       });
   });
 
+  it('Rejects string input and responds with the expected error message.', (done) => {
+    request(app)
+      .get('/fib')
+      .query({ n: "９９" })
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(400)
+      .end((err, res) => {
+        if (err) return done(err);
+
+        const expectedResponse = {
+          status: 400,
+          message: "Don't input string. Input must be a positive integer."
+        };
+
+        assert.deepStrictEqual(res.body, expectedResponse, 'Response body does not match expected structure');
+
+        done();
+      });
+  });
+
   it('Rejects decimal input and responds with the expected error message.', (done) => {
     request(app)
       .get('/fib')
@@ -140,6 +161,27 @@ describe('GET /fib', () => {
         const expectedResponse = {
           status: 400,
           message: "Don't input a 0 in the first letter. Input must be a positive integer."
+        };
+
+        assert.deepStrictEqual(res.body, expectedResponse, 'Response body does not match expected structure');
+
+        done();
+      });
+  });
+
+  it('Rejects decimal input and responds with the expected error message.', (done) => {
+    request(app)
+      .get('/fib')
+      .query({ n: 99.01 })
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(400)
+      .end((err, res) => {
+        if (err) return done(err);
+
+        const expectedResponse = {
+          status: 400,
+          message: "Don't input decimal number. Input must be a positive integer."
         };
 
         assert.deepStrictEqual(res.body, expectedResponse, 'Response body does not match expected structure');
@@ -182,6 +224,26 @@ describe('GET /fib', () => {
         const expectedResponse = {
           status: 400,
           message: "Don't input a 0 in the first letter. Input must be a positive integer."
+        };
+
+        assert.deepStrictEqual(res.body, expectedResponse, 'Response body does not match expected structure');
+
+        done();
+      });
+  });
+  
+  it('Returns 404 with the expected error message for unknown endpoint', (done) => {
+    request(app)
+      .get('/other')  // 未知のエンドポイント
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(404)
+      .end((err, res) => {
+        if (err) return done(err);
+
+        const expectedResponse = {
+          status: 404,
+          message: "Not found"
         };
 
         assert.deepStrictEqual(res.body, expectedResponse, 'Response body does not match expected structure');

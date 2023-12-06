@@ -5,7 +5,6 @@ const port = 3000;
 //JSONbig.stringify() メソッドを呼び出すことができるようになる
 const JSONbig = require('json-bigint');
 
-
 function calculateFibonacci(n) {
   var current = BigInt(1);
   var next = BigInt(1);
@@ -18,8 +17,6 @@ function calculateFibonacci(n) {
   return current;
 }
 
-//１文字目が0の時
-
 app.get('/fib', (req, res) => {
   try {
     if (!req.query.n) {
@@ -30,19 +27,19 @@ app.get('/fib', (req, res) => {
       throw new Error('Don\'t input a 0 in the first letter. Input must be a positive integer.');
     }
 
-    const n = parseFloat(req.query.n);
-
-    if (isNaN(n) || isNaN(req.query.n)) {
+    if (isNaN(req.query.n)) {
       throw new Error('Don\'t input string. Input must be a positive integer.');
     }
+
+    const n = parseFloat(req.query.n);
 
     if (n <= 0) {
       throw new Error('Don\'t input non-positive number. Input must be a positive integer.');
     }
 
-    /*if (n % 1 !== 0) {
+    if (n % 1 !== 0) {
       throw new Error('Don\'t input decimal number. Input must be a positive integer.');
-    }*/
+    }
 
     var data = calculateFibonacci(n);
     //data オブジェクトを JSON 文字列に変換
@@ -52,6 +49,10 @@ app.get('/fib', (req, res) => {
   } catch (error) {
     res.status(400).json({ status: 400, message: error.message });
   }
+});
+
+app.use((req, res, next) => {
+  res.status(404).json({ status: 404, message: "Not found" });
 });
 
 app.listen(port, () => {
