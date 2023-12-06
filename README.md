@@ -18,17 +18,17 @@ fib_api/
 |-- package.json  
 |-- package-lock.json  
 
-* node_modules
+* node_modules:
 プロジェクトが依存するパッケージ（ライブラリやモジュール）が格納されるディレクトリ
-* app.js
+* app.js:
 Expressを使用したnode.jsアプリケーション
 '/fib' エンドポイントを通じてFibonacci数列を計算してJSON形式で返すREST API
-* app.test.js
+* app.test.js:
 '/fib' エンドポイントに対して異なる入力値や条件に基づいて正しいレスポンスが返されるかどうかを確認するためのテストコード
-* package-lock.json
+* package-lock.json:
   npm installで作られる
 Node.js プロジェクトにおいて依存関係のバージョンを厳密に管理し、再現性を確保するためのもの
-* package.json
+* package.json:
 npm initで作られる。
 Node.jsのプロジェクトの構成や依存関係、実行可能なスクリプトなどを一元管理する役割
 
