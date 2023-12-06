@@ -148,6 +148,27 @@ describe('GET /fib', () => {
       });
   });
 
+  it('Rejects string input and responds with the expected error message.', (done) => {
+    request(app)
+      .get('/fib')
+      .query({ n: "全角テst" })
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(400)
+      .end((err, res) => {
+        if (err) return done(err);
+
+        const expectedResponse = {
+          status: 400,
+          message: "Bad Request. Input must be a positive integer."
+        };
+
+        assert.deepStrictEqual(res.body, expectedResponse, 'Response body does not match expected structure');
+
+        done();
+      });
+  });
+
   it('Rejects decimal input and responds with the expected error message.', (done) => {
     request(app)
       .get('/fib')
