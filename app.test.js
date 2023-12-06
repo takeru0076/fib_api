@@ -84,6 +84,48 @@ describe('GET /fib', () => {
       });
   });
 
+  it('n=0', (done) => {
+    request(app)
+      .get('/fib')
+      .query({ n: 0 })
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(400)
+      .end((err, res) => {
+        if (err) return done(err);
+
+        const expectedResponse = {
+          status: 400,
+          message: "Bad Request. Input must be a positive integer."
+        };
+
+        assert.deepStrictEqual(res.body, expectedResponse, 'Response body does not match expected structure');
+
+        done();
+      });
+  });
+
+  it('n=0.1', (done) => {
+    request(app)
+      .get('/fib')
+      .query({ n: 0.1 })
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(400)
+      .end((err, res) => {
+        if (err) return done(err);
+
+        const expectedResponse = {
+          status: 400,
+          message: "Bad Request. Input must be a positive integer."
+        };
+
+        assert.deepStrictEqual(res.body, expectedResponse, 'Response body does not match expected structure');
+
+        done();
+      });
+  });
+
   it('n=-1', (done) => {
     request(app)
       .get('/fib')
@@ -105,10 +147,73 @@ describe('GET /fib', () => {
       });
   });
 
+  it('n=９９', (done) => {
+    request(app)
+      .get('/fib')
+      .query({ n: "９９" })
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(400)
+      .end((err, res) => {
+        if (err) return done(err);
+
+        const expectedResponse = {
+          status: 400,
+          message: "Bad Request. Input must be a positive integer."
+        };
+
+        assert.deepStrictEqual(res.body, expectedResponse, 'Response body does not match expected structure');
+
+        done();
+      });
+  });
+
+  it('n=99.01', (done) => {
+    request(app)
+      .get('/fib')
+      .query({ n: 99.01 })
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(400)
+      .end((err, res) => {
+        if (err) return done(err);
+
+        const expectedResponse = {
+          status: 400,
+          message: "Bad Request. Input must be a positive integer."
+        };
+
+        assert.deepStrictEqual(res.body, expectedResponse, 'Response body does not match expected structure');
+
+        done();
+      });
+  });
+
   it('n=1.2e-3', (done) => {
     request(app)
       .get('/fib')
       .query({ n: 1.2e-3 })
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(400)
+      .end((err, res) => {
+        if (err) return done(err);
+
+        const expectedResponse = {
+          status: 400,
+          message: "Bad Request. Input must be a positive integer."
+        };
+
+        assert.deepStrictEqual(res.body, expectedResponse, 'Response body does not match expected structure');
+
+        done();
+      });
+  });
+
+  it('n=0123', (done) => {
+    request(app)
+      .get('/fib')
+      .query({ n: "0123" })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(400)
@@ -168,115 +273,10 @@ describe('GET /fib', () => {
       });
   });
 
-  it('n=９９', (done) => {
-    request(app)
-      .get('/fib')
-      .query({ n: "９９" })
-      .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
-      .expect(400)
-      .end((err, res) => {
-        if (err) return done(err);
-
-        const expectedResponse = {
-          status: 400,
-          message: "Bad Request. Input must be a positive integer."
-        };
-
-        assert.deepStrictEqual(res.body, expectedResponse, 'Response body does not match expected structure');
-
-        done();
-      });
-  });
-
   it('n=全角テst', (done) => {
     request(app)
       .get('/fib')
       .query({ n: "全角テst" })
-      .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
-      .expect(400)
-      .end((err, res) => {
-        if (err) return done(err);
-
-        const expectedResponse = {
-          status: 400,
-          message: "Bad Request. Input must be a positive integer."
-        };
-
-        assert.deepStrictEqual(res.body, expectedResponse, 'Response body does not match expected structure');
-
-        done();
-      });
-  });
-
-  it('n=0.1', (done) => {
-    request(app)
-      .get('/fib')
-      .query({ n: 0.1 })
-      .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
-      .expect(400)
-      .end((err, res) => {
-        if (err) return done(err);
-
-        const expectedResponse = {
-          status: 400,
-          message: "Bad Request. Input must be a positive integer."
-        };
-
-        assert.deepStrictEqual(res.body, expectedResponse, 'Response body does not match expected structure');
-
-        done();
-      });
-  });
-
-  it('n=99.01', (done) => {
-    request(app)
-      .get('/fib')
-      .query({ n: 99.01 })
-      .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
-      .expect(400)
-      .end((err, res) => {
-        if (err) return done(err);
-
-        const expectedResponse = {
-          status: 400,
-          message: "Bad Request. Input must be a positive integer."
-        };
-
-        assert.deepStrictEqual(res.body, expectedResponse, 'Response body does not match expected structure');
-
-        done();
-      });
-  });
-
-  it('n=0123', (done) => {
-    request(app)
-      .get('/fib')
-      .query({ n: "0123" })
-      .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
-      .expect(400)
-      .end((err, res) => {
-        if (err) return done(err);
-
-        const expectedResponse = {
-          status: 400,
-          message: "Bad Request. Input must be a positive integer."
-        };
-
-        assert.deepStrictEqual(res.body, expectedResponse, 'Response body does not match expected structure');
-
-        done();
-      });
-  });
-
-  it('n=0', (done) => {
-    request(app)
-      .get('/fib')
-      .query({ n: 0 })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(400)
