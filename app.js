@@ -17,6 +17,11 @@ function calculateFibonacci(n) {
   return current;
 }
 
+app.get('/', (req, res) => {
+  res.send('Hello, World!');
+});
+
+
 app.get('/fib', (req, res) => {
   try {
     if (req.query.n.charAt(0) === '0') {
