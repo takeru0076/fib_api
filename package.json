@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "node app.js",
     "test": "mocha app.test.js",
-    "start": "node app.js"
+    "start": "node app.js",
+    "build": "echo 'Build script placeholder'"
   },
   "keywords": [],
   "author": "",
