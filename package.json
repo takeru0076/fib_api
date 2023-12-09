@@ -21,8 +21,5 @@
     "mocha": "^10.2.0",
     "start-server-and-test": "^2.0.3",
     "supertest": "^6.3.3"
-  },
-  "dependencies": {
-    "fibonacci": "^1.6.11"
   }
 }
