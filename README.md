@@ -52,7 +52,7 @@ https://entake-speee.onrender.com/fib?n=x
 * curlコマンド例 
 
 ```
- curl -X GET -H "Content-Type: application/json" " https://entake-speee.onrender.com/fib?n=x"
+ curl -X GET -H "Content-Type: application/json" "https://entake-speee.onrender.com/fib?n=99"
  ```
 
 * xに当てはまるリクエスト成功時パラメータ
@@ -92,7 +92,7 @@ https://entake-speee.onrender.com/fib?n=x
 | 400 | 不正なリクエストパラメータを指定している |
 | 404 | 存在しないURLにアクセス |
 
-**数値の条件**
+**数値の条件**  
 ECMAScript(JavaScript言語の標準仕様を規定した文書のこと)において、以下の数値として扱われるものの中で自然数をふさわしい入力とす
 る。
 ECMAScriptにおいて、数値として扱われるものは主に以下の半角のもの(ChatGPTより)  
