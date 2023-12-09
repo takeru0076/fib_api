@@ -43,8 +43,8 @@ function fibonacci(n) {
     [BigInt(1), BigInt(1)],
     [BigInt(1), BigInt(0)],
   ];
-  const poweredMatrix = power(baseMatrix, n + 1);
-  return poweredMatrix[1][0].toString();
+  const poweredMatrix = power(baseMatrix, n);
+  return poweredMatrix[0][1];
 }
 
 app.get('/', (req, res) => {
