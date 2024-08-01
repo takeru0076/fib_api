@@ -47,6 +47,17 @@ function fibonacci(n) {
   return poweredMatrix[0][1];
 }
 
+//405エラー処理と500エラー処理を実装すればよかった
+
+// 405エラー処理
+app.use((req, res, next) => {
+  if (req.method !== 'GET') {
+    res.status(405).json({ status: 405, message: 'Method Not Allowed' });
+  } else {
+    next();
+  }
+});
+
 app.get('/', (req, res) => {
   res.send('Hello, World!');
 });
@@ -72,8 +83,23 @@ app.get('/fib', (req, res) => {
   }
 });
 
-app.use((req, res, next) => {
+/*app.use((req, res, next) => {
   res.status(404).json({ status: 404, message: 'Not found' });
+});*/
+
+app.use((req, res, next) => {
+  const existingPaths = ['/', '/fib']; // 存在するパスのリスト
+  if (!existingPaths.includes(req.path)) {
+    res.status(404).json({ status: 404, message: 'Not found' });
+  } else {
+    next(); // 存在するパスなら次の中間処理へ
+  }
+});
+
+// 500エラー処理
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ status: 500, message: 'Internal Server Error' });
 });
 
 app.listen(port, () => {
